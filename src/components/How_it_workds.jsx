@@ -85,7 +85,7 @@ const HowItWorksSection = () => {
                   </div>
                   <div>
                     <h3
-                      className={`text-xl font-bold transition-colors duration-300 ${styles.text}`}
+                      className={`text-xl transition-colors duration-300 ${styles.text}`}
                     >
                       {step.title}
                     </h3>
