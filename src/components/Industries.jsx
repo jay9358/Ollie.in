@@ -8,9 +8,10 @@ const personaPositions = [
 ];
 
 // An estimated height for a persona card to calculate required container space
-const CARD_ESTIMATED_HEIGHT = 350; // px
+const CARD_ESTIMATED_HEIGHT = 355; // px
 
 const IndustrySection= () => {
+    const [hoveredCard, setHoveredCard] = useState(null);    
     const [activeIndex, setActiveIndex] = useState(0);
     const activeIndustry = industryData[activeIndex];
 
@@ -76,7 +77,7 @@ const IndustrySection= () => {
                             >
                                 {/* Decorative Shapes */}
                                 <>
-                                    <div className="hidden lg:block absolute top-[-20px] left-[5%] w-24 h-40 border-l-[16px] border-b-[16px] border-purple-400 rounded-bl-3xl opacity-80 z-10" style={{ transform: 'rotate(-15deg)' }}></div>
+                                    <div className="hidden lg:block absolute top-[-20px] left-[5%] w-24 h-40 border-l-[16px] border-b-[16px] border-purple-400 rounded-bl-3xl opacity-80 z-10" style={{ transform: 'rotate(-16deg)' }}></div>
                                     <div className="hidden lg:block absolute top-[25%] right-[-5%] w-48 h-48 bg-green-200/80 rounded-tl-full rounded-bl-full rounded-br-full z-0" style={{ transform: 'rotate(20deg)' }}></div>
                                     <div className="hidden lg:block absolute bottom-[5%] left-[30%] w-28 h-28 bg-orange-300/90 rounded-full z-0"></div>
                                 </>
@@ -85,39 +86,51 @@ const IndustrySection= () => {
                                     const position = personaPositions[index % personaPositions.length];
 
                                     return (
-                                        <div 
-                                            key={persona.name}
-                                            className="mb-6 lg:absolute lg:mb-0 transition-all duration-500"
-                                            style={{
-                                                top: isDesktop ? `${position.top}px` : 'auto',
-                                                left: isDesktop ? position.left : 'auto',
-                                                transform: isDesktop ? `rotate(${position.rotation}deg)`: 'none',
-                                                zIndex: position.zIndex,
-                                            }}
+<div 
+    key={persona.name}
+    className="mb-6 lg:absolute lg:mb-0 transition-all duration-300"
+    style={{
+        top: isDesktop ? `${position.top}px` : 'auto',
+        left: isDesktop ? position.left : 'auto',
+        transform: isDesktop ? `rotate(${position.rotation}deg)` : 'none',
+        zIndex: hoveredCard === persona.name ? 1000 : position.zIndex,
+            }}
+            onMouseEnter={() => setHoveredCard(persona.name)}
+            onMouseLeave={() => setHoveredCard(null)}
+>
+    <div className="relative bg-white rounded-2xl shadow-xl p-5 flex items-start gap-5 w-full max-w-md lg:w-max
+                    transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+        <img 
+            src={persona.image} 
+            alt={persona.name} 
+            className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover flex-shrink-0" 
+        />
+        <div className="flex-grow">
+            <p className="font-bold text-stone-900">{persona.name}</p>
+            <p className="text-xs text-stone-500 mb-3">{persona.role}</p>
+            <div className="grid grid-cols-[max-content,1fr] gap-x-4 gap-y-2 items-center text-sm">
+                {persona.details.map(detail => (
+                    <React.Fragment key={detail.label}>
+                        <span className="font-semibold text-stone-500 text-right">{detail.label}:</span>
+                        <div>
+                            {detail.label.toLowerCase().includes('days') ? (
+                                <div className="flex flex-wrap gap-1.5 items-center">
+                                    {detail.value.split(' · ').map(day => (
+                                        <span 
+                                            key={day} 
+                                            className="text-xs px-2.5 py-1 border border-purple-300 rounded-full text-purple-800 font-medium bg-purple-50"
                                         >
-                                            <div className="bg-white rounded-2xl shadow-xl p-5 flex items-start gap-5 w-full max-w-md lg:w-max transition-transform duration-300 hover:scale-[1.05] hover:shadow-2xl hover:!z-50">
-                                                <img src={persona.image} alt={persona.name} className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover flex-shrink-0" />
-                                                <div className="flex-grow">
-                                                    <p className="font-bold text-stone-900">{persona.name}</p>
-                                                    <p className="text-xs text-stone-500 mb-3">{persona.role}</p>
-                                                    <div className="grid grid-cols-[max-content,1fr] gap-x-4 gap-y-2 items-center text-sm">
-                                                        {persona.details.map(detail => (
-                                                            <React.Fragment key={detail.label}>
-                                                                <span className="font-semibold text-stone-500 text-right">{detail.label}:</span>
-                                                                <div>
-                                                                    {detail.label.toLowerCase().includes('days') ? (
-                                                                        <div className="flex flex-wrap gap-1.5 items-center">
-                                                                            {detail.value.split(' · ').map(day => (
-                                                                                <span key={day} className="text-xs px-2.5 py-1 border border-purple-300 rounded-full text-purple-800 font-medium bg-purple-50">{day}</span>
-                                                                            ))}
-                                                                        </div>
-                                                                    ) : detail.label === 'Frequency' ? (
-                                                                        <span className="text-xs px-2.5 py-1 bg-purple-100 text-purple-800 rounded-full font-semibold">{detail.value}</span>
-                                                                    ) : (
-                                                                        <span className="text-stone-700">{detail.value}</span>
-                                                                    )}
-                                                                </div>
-                                                            </React.Fragment>
+                                            {day}
+                                        </span>
+                                    ))}
+                                </div>
+                            ) : detail.label === 'Frequency' ? (
+                                <span className="text-xs px-2.5 py-1 bg-purple-100 text-purple-800 rounded-full font-semibold">{detail.value}</span>
+                            ) : (
+                                <span className="text-stone-700">{detail.value}</span>
+                            )}
+                        </div>
+                    </React.Fragment>
                                                         ))}
                                                     </div>
                                                 </div>

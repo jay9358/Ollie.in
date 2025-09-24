@@ -46,7 +46,7 @@ const HowItWorksSection = () => {
     <section id="how-it-works" className="py-24 lg:py-32 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tighter text-stone-900">
+          <h2 className="text-4xl lg:text-5xl  tracking-tighter text-stone-900">
             How AI decisioning works
           </h2>
         </div>

@@ -55,7 +55,7 @@ const HighlightSection = ({ text = "" }) => {
 
       {/* Centered text */}
       <div className="relative text-center max-w-xl px-6">
-        <p className="text-2xl sm:text-4xl md:text-5xl font-semibold text-black leading-snug">
+        <p className="text-2xl sm:text-4xl md:text-5xl text-black leading-snug">
           {text.split("*").map((part, i) =>
             i % 2 === 1 ? (
               <em key={i} className="italic">

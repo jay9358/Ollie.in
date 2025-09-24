@@ -39,7 +39,7 @@ const DesignSection = () => {
             </span>
             <br />
             <span className="text-[#99bc43] italic bg-clip-text ">for individuals,</span>
-            <div className="text-[#99bc43] bg-clip-text relative"> not segments.
+            <div className="text-[#99bc43] bg-clip-text relative"> not segments
             </div>
           </h1>
 
