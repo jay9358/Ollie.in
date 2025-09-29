@@ -121,11 +121,12 @@ const IndustrySection = () => {
           key={activeIndex}
           className="bg-white p-8 sm:p-12 rounded-3xl border border-stone-200 shadow-lg animate-fade-in"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-x-12 gap-y-16">
+          {/* Desktop Layout */}
+          <div className="hidden lg:grid grid-cols-5 gap-x-8 gap-y-16">
             {/* Personas Section */}
-            <div className="lg:col-span-3">
+            <div className="col-span-3">
               <div
-                className="relative min-h-[500px] lg:min-h-0"
+                className="relative min-h-0 overflow-hidden"
                 style={{
                   minHeight: personaContainerHeight
                     ? `${personaContainerHeight}px`
@@ -135,14 +136,14 @@ const IndustrySection = () => {
                 {/* Decorative Shapes */}
                 <>
                   <div
-                    className="hidden lg:block absolute top-[-20px] left-[5%] w-24 h-40 border-l-[16px] border-b-[16px] border-purple-400 rounded-bl-3xl opacity-80 z-10"
+                    className="absolute top-[-20px] left-[5%] w-24 h-40 border-l-[16px] border-b-[16px] border-purple-400 rounded-bl-3xl opacity-80 z-10"
                     style={{ transform: 'rotate(-16deg)' }}
                   ></div>
                   <div
-                    className="hidden lg:block absolute top-[25%] right-[-5%] w-48 h-48 bg-green-200/80 rounded-tl-full rounded-bl-full rounded-br-full z-0"
+                    className="absolute top-[25%] right-[-5%] w-48 h-48 bg-green-200/80 rounded-tl-full rounded-bl-full rounded-br-full z-0"
                     style={{ transform: 'rotate(20deg)' }}
                   ></div>
-                  <div className="hidden lg:block absolute bottom-[5%] left-[30%] w-28 h-28 bg-orange-300/90 rounded-full z-0"></div>
+                  <div className="absolute bottom-[5%] left-[30%] w-28 h-28 bg-orange-300/90 rounded-full z-0"></div>
                 </>
 
                 {activeIndustry.personas.map((persona, index) => {
@@ -151,30 +152,31 @@ const IndustrySection = () => {
                   return (
                     <div
                       key={persona.name}
-                      className="mb-6 lg:absolute lg:mb-0 transition-all duration-300"
+                      className="absolute mb-0 transition-all duration-300"
                       style={{
-                        top: isDesktop ? `${position.top}px` : 'auto',
-                        left: isDesktop ? position.left : 'auto',
-                        transform: isDesktop ? `rotate(${position.rotation}deg)` : 'none',
+                        top: `${position.top}px`,
+                        left: position.left,
+                        transform: `rotate(${position.rotation}deg)`,
                         zIndex: hoveredCard === persona.name ? 1000 : position.zIndex,
+                        maxWidth: 'calc(100% - 2rem)',
                       }}
                       onMouseEnter={() => setHoveredCard(persona.name)}
                       onMouseLeave={() => setHoveredCard(null)}
                     >
-                      <div className="relative bg-white rounded-2xl shadow-lg p-5 w-full max-w-md lg:w-max transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                      <div className="relative bg-white rounded-2xl shadow-lg p-5 w-max max-w-sm transition-transform duration-300 hover:scale-105 hover:shadow-xl">
                         <div className="flex p-auto">
                           <img
                             src={persona.image}
                             alt={persona.name}
-                            className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover flex-shrink-0"
+                            className="w-20 h-20 rounded-2xl object-cover flex-shrink-0"
                           />
-                          <div className="m-auto ml-5">
-                            <p className="font-bold text-stone-900">{persona.name}</p>
-                            <p className="text-xs text-stone-500 mb-3">{persona.role}</p>
+                          <div className="m-auto ml-4">
+                            <p className="font-bold text-stone-900 text-sm">{persona.name}</p>
+                            <p className="text-xs text-stone-500 mb-2">{persona.role}</p>
                           </div>
                         </div>
-                        <div className="flex-grow p-[6px] ml-[1px]">
-                          <div className="grid grid-cols-[max-content,1fr] gap-x-4 gap-y-2 items-center text-sm">
+                        <div className="flex-grow p-[4px] ml-[1px]">
+                          <div className="grid grid-cols-[max-content,1fr] gap-x-3 gap-y-1.5 items-center text-xs">
                             {persona.details.map((detail) => (
                               <React.Fragment key={detail.label}>
                                 <span className="font-semibold text-stone-500 text-right">
@@ -182,22 +184,22 @@ const IndustrySection = () => {
                                 </span>
                                 <div>
                                   {detail.label.toLowerCase().includes('days') ? (
-                                    <div className="flex flex-wrap gap-1.5 items-center">
+                                    <div className="flex flex-wrap gap-1 items-center">
                                       {detail.value.split(' · ').map((day) => (
                                         <span
                                           key={day}
-                                          className="text-xs px-2.5 py-1 border border-purple-300 rounded-full text-purple-800 font-medium bg-purple-50"
+                                          className="text-xs px-2 py-0.5 border border-purple-300 rounded-full text-purple-800 font-medium bg-purple-50"
                                         >
                                           {day}
                                         </span>
                                       ))}
                                     </div>
                                   ) : detail.label === 'Frequency' ? (
-                                    <span className="text-xs px-2.5 py-1 bg-purple-100 text-purple-800 rounded-full font-semibold">
+                                    <span className="text-xs px-2 py-0.5 bg-purple-100 text-purple-800 rounded-full font-semibold">
                                       {detail.value}
                                     </span>
                                   ) : (
-                                    <span className="text-stone-700">{detail.value}</span>
+                                    <span className="text-stone-700 text-xs">{detail.value}</span>
                                   )}
                                 </div>
                               </React.Fragment>
@@ -212,7 +214,7 @@ const IndustrySection = () => {
             </div>
 
             {/* Use Cases */}
-            <div className="lg:col-span-2 space-y-6 lg:flex lg:flex-col lg:justify-center">
+            <div className="col-span-2 space-y-6 flex flex-col justify-center">
               <div className="space-y-4">
                 {activeIndustry.useCases.map((useCase) => (
                   <div
@@ -227,6 +229,100 @@ const IndustrySection = () => {
                 ))}
               </div>
             </div>
+          </div>
+
+          {/* Mobile Layout - Alternating Pattern */}
+          <div className="lg:hidden space-y-6">
+            {(() => {
+              const mobileItems = [];
+              const personas = activeIndustry.personas;
+              const useCases = activeIndustry.useCases;
+              
+              // Pattern: 1 persona, 2 use cases, 1 persona, 2 use cases, 1 persona, 1 use case
+              const pattern = [
+                { type: 'persona', count: 1 },
+                { type: 'useCase', count: 2 },
+                { type: 'persona', count: 1 },
+                { type: 'useCase', count: 2 },
+                { type: 'persona', count: 1 },
+                { type: 'useCase', count: 1 }
+              ];
+              
+              let personaIndex = 0;
+              let useCaseIndex = 0;
+              
+              pattern.forEach((section) => {
+                for (let i = 0; i < section.count; i++) {
+                  if (section.type === 'persona' && personaIndex < personas.length) {
+                    const persona = personas[personaIndex];
+                    mobileItems.push(
+                      <div key={`persona-${personaIndex}`} className="mb-6">
+                        <div className="relative bg-white rounded-2xl shadow-lg p-5 w-full transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                          <div className="flex p-auto">
+                            <img
+                              src={persona.image}
+                              alt={persona.name}
+                              className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover flex-shrink-0"
+                            />
+                            <div className="m-auto ml-5">
+                              <p className="font-bold text-stone-900">{persona.name}</p>
+                              <p className="text-xs text-stone-500 mb-3">{persona.role}</p>
+                            </div>
+                          </div>
+                          <div className="flex-grow p-[6px] ml-[1px]">
+                            <div className="grid grid-cols-[max-content,1fr] gap-x-4 gap-y-2 items-center text-sm">
+                              {persona.details.map((detail) => (
+                                <React.Fragment key={detail.label}>
+                                  <span className="font-semibold text-stone-500 text-right">
+                                    {detail.label}:
+                                  </span>
+                                  <div>
+                                    {detail.label.toLowerCase().includes('days') ? (
+                                      <div className="flex flex-wrap gap-1.5 items-center">
+                                        {detail.value.split(' · ').map((day) => (
+                                          <span
+                                            key={day}
+                                            className="text-xs px-2.5 py-1 border border-purple-300 rounded-full text-purple-800 font-medium bg-purple-50"
+                                          >
+                                            {day}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    ) : detail.label === 'Frequency' ? (
+                                      <span className="text-xs px-2.5 py-1 bg-purple-100 text-purple-800 rounded-full font-semibold">
+                                        {detail.value}
+                                      </span>
+                                    ) : (
+                                      <span className="text-stone-700">{detail.value}</span>
+                                    )}
+                                  </div>
+                                </React.Fragment>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                    personaIndex++;
+                  } else if (section.type === 'useCase' && useCaseIndex < useCases.length) {
+                    const useCase = useCases[useCaseIndex];
+                    mobileItems.push(
+                      <div key={`usecase-${useCaseIndex}`} className="mb-4">
+                        <div className="bg-stone-50 p-5 rounded-2xl border border-stone-200 transition hover:shadow-sm">
+                          <p className="font-semibold text-stone-800">{useCase.title}</p>
+                          <p className="text-stone-600 text-sm leading-relaxed">
+                            {useCase.description}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                    useCaseIndex++;
+                  }
+                }
+              });
+              
+              return mobileItems;
+            })()}
           </div>
         </div>
       </div>

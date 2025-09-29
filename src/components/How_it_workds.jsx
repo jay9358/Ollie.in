@@ -107,13 +107,15 @@ const HowItWorksSection = () => {
           </div>
 
           {/* Image preview */}
-          <div className=" p-4 sm:p-6 rounded-2xl min-h-[300px] lg:min-h-[400px] flex items-center justify-center transition-all duration-500 ease-in-out">
-            <div key={activeIndex} className="w-full animate-fade-in shadow-2xl ">
-              <img
-                src={steps[activeIndex].image}
-                alt={steps[activeIndex].title}
-                className="w-full h-auto rounded-xl shadow-2xl "
-              />
+          <div className="relative p-6 sm:p-8  from-stone-50 to-stone-100 rounded-3xl min-h-[300px] lg:min-h-[400px] flex items-center justify-center transition-all duration-500 ease-in-out ">
+            <div key={activeIndex} className="w-full max-w-full animate-fade-in">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white p-2">
+                <img
+                  src={steps[activeIndex].image}
+                  alt={steps[activeIndex].title}
+                  className="w-full h-auto object-contain rounded-xl transition-transform duration-300 hover:scale-105"
+                />
+              </div>
             </div>
           </div>
         </div>
