@@ -122,11 +122,11 @@ const HeroSection = () => {
   }, [typedStrings]);
 
   return (
-    <section className="container mx-auto px-7 py-[6.5rem] leading-tight">
-      <div className="grid grid-cols-1 md:grid-cols-1 gap-16 items-center">
-        <div className="flex flex-col space-y-[1rem]">
+    <section className="container mx-auto px-10 py-[9.5rem] leading-tight">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-20 items-center">
+        <div className="flex flex-col space-y-[2rem]">
           <h1 className="text-5xl lg:text-5xl tracking-tighter leading-tight">
-            {title}
+            {title} 
           </h1>
 
           <p className="text-2xl  my-10 text-[#878787]">{subtitle}</p>

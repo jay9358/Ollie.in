@@ -11,22 +11,28 @@ const activeColors = {
 
 const steps = [
   {
-    title: 'Choose a success metric',
+    title: 'Define your business goal',
     description:
-      'The AI decisioning agent will optimize your most critical business KPI.',
-    image: '/assets/graph1.png', // replace with your image path
+      'Protect margins or lift revenue — Ollie optimizes toward your critical KPI (ARPU, attach rate, conversion, retention) under your guardrails.',
+    image: '/assets/graph1.jpeg', // replace with your image path
   },
   {
-    title: 'Choose the actions the AI decisioning agent can take',
+    title: 'Load your lever library',
     description:
-      'Agents choose channels, messages, offers, products, times and days to send, and frequencies of communication.',
+      'Discounts, upsells, bundles, loyalty boosts, reassurance messages. Ollie connects to your CRM, CMS, and promo systems so every lever is on the table.',
     image: '/assets/graph2.png', // replace with your image path
   },
   {
-    title: 'The AI decisioning agent finds the best actions for each individual',
+    title: 'Real-time arbitration',
     description:
-      'The agent autonomously experiments and continuously learns from customer behavior.',
+      'Every user, every session, every trigger: Ollie decides which lever to fire — or hold back — balancing uplift vs. margin risk.',
     image: '/assets/graph3.png', // replace with your image path
+  },
+  {
+    title: 'Continuous learning',
+    description:
+      'No static journeys. Ollie updates policies as user behavior, inventory, and market conditions shift. You get audit trails and alerts when baselines change.',
+    image: '/assets/graph4.png', // replace with your image path
   },
 ];
 
