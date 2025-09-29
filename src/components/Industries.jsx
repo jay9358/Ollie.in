@@ -88,7 +88,7 @@ const IndustrySection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center max-w-4xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-stone-900">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl  tracking-tight text-stone-900">
             Ollie finds the optimal action
             <div>
               <span className="text-[#99bc43]">for every customer,</span>{' '}
