@@ -7,6 +7,22 @@ handlers:
   - url: /assets
     static_dir: build/assets
 
+  - url: /logo.png
+    static_files: build/logo.png
+    upload: build/logo.png
+
+  - url: /manifest.json
+    static_files: build/manifest.json
+    upload: build/manifest.json
+
+  - url: /robots.txt
+    static_files: build/robots.txt
+    upload: build/robots.txt
+
+  - url: /sitemap.xml
+    static_files: build/sitemap.xml
+    upload: build/sitemap.xml
+
   - url: /.*
     static_files: build/index.html
     upload: build/index.html
