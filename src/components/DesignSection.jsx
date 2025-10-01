@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CardSwap, { Card } from "./CardSwap";
 
 const cardData = [
@@ -23,6 +23,43 @@ const cardData = [
 ];
 
 const DesignSection = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time for CardSwap animation
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Simple CardSwap Loader
+  const CardSwapLoader = () => (
+    <div className="relative w-[300px] sm:w-[350px] lg:w-[400px] h-[300px] sm:h-[350px] lg:h-[400px] top-[-60px]">
+      {/* Main card */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#e0f8a5] to-[#d9f19e] rounded-3xl shadow-2xl p-8 flex flex-col justify-end animate-pulse">
+        <div className="space-y-4">
+          <div className="h-8 bg-[#4a5c21] bg-opacity-30 rounded-lg w-3/4"></div>
+          <div className="space-y-2">
+            <div className="h-4 bg-[#5a7029] bg-opacity-30 rounded w-full"></div>
+            <div className="h-4 bg-[#5a7029] bg-opacity-30 rounded w-5/6"></div>
+            <div className="h-4 bg-[#5a7029] bg-opacity-30 rounded w-4/6"></div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Loading spinner */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-12 h-12 border-3 border-[#4a5c21] border-opacity-30 border-t-[#4a5c21] rounded-full animate-spin"></div>
+      </div>
+      
+      {/* Background cards for depth */}
+      <div className="absolute top-4 left-4 w-full h-full bg-gradient-to-br from-[#e0f8a5] to-[#d9f19e] rounded-3xl shadow-xl opacity-60 transform translate-x-2 translate-y-2"></div>
+      <div className="absolute top-8 left-8 w-full h-full bg-gradient-to-br from-[#e0f8a5] to-[#d9f19e] rounded-3xl shadow-lg opacity-40 transform translate-x-4 translate-y-4"></div>
+    </div>
+  );
+
   return (
     <section className="w-full px-6 py-24 overflow-hidden border-t border-b border-gray-200">
       {/* Container */}
@@ -52,30 +89,36 @@ const DesignSection = () => {
         </div>
 
         {/* Right side CardSwap */}
-        <div className="relative mt-10 lg:mt-0 w-[300px] sm:w-[350px] lg:w-[400px] h-[300px] sm:h-[350px] lg:h-[400px] top-[-60px]">
-          <CardSwap
-            width={384}
-            height={384}
-            cardDistance={30}
-            verticalDistance={30}
-            delay={4000}
-            skewAmount={6}
-            easing="elastic"
-          >
-            {cardData.map((card) => (
-              <Card
-                key={card.id}
-                className="bg-gradient-to-br from-[#e0f8a5] to-[#d9f19e] rounded-3xl shadow-2xl p-8 flex flex-col justify-end cursor-pointer"
+        <div className="relative mt-10 lg:mt-0">
+          {isLoading ? (
+            <CardSwapLoader />
+          ) : (
+            <div className="w-[300px] sm:w-[350px] lg:w-[400px] h-[300px] sm:h-[350px] lg:h-[400px] top-[-60px]">
+              <CardSwap
+                width={384}
+                height={384}
+                cardDistance={30}
+                verticalDistance={30}
+                delay={4000}
+                skewAmount={6}
+                easing="elastic"
               >
-                <h3 className="text-2xl font-bold tracking-tight text-[#4a5c21]">
-                  {card.title}
-                </h3>
-                <p className="mt-2 text-[#5a7029] leading-relaxed">
-                  {card.description}
-                </p>
-              </Card>
-            ))}
-          </CardSwap>
+                {cardData.map((card) => (
+                  <Card
+                    key={card.id}
+                    className="bg-gradient-to-br from-[#e0f8a5] to-[#d9f19e] rounded-3xl shadow-2xl p-8 flex flex-col justify-end cursor-pointer"
+                  >
+                    <h3 className="text-2xl font-bold tracking-tight text-[#4a5c21]">
+                      {card.title}
+                    </h3>
+                    <p className="mt-2 text-[#5a7029] leading-relaxed">
+                      {card.description}
+                    </p>
+                  </Card>
+                ))}
+              </CardSwap>
+            </div>
+          )}
         </div>
       </div>
     </section>
