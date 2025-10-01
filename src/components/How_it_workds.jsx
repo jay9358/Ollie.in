@@ -43,7 +43,7 @@ const inactiveColors = {
   descriptionText: 'text-stone-600',
 };
 
-const iconInactiveBgs = ['bg-[#000000]', 'bg-[#000000]', 'bg-[#000000]'];
+const iconInactiveBgs = ['bg-[#000000]', 'bg-[#000000]', 'bg-[#000000]', 'bg-[#000000]'];
 
 const HowItWorksSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -111,7 +111,7 @@ const HowItWorksSection = () => {
                         <img
                           src={step.image}
                           alt={step.title}
-                          className="w-full h-48 sm:h-64 object-contain rounded-xl"
+                          className="w-full h-auto object-contain rounded-xl"
                         />
                       </div>
                     </div>
@@ -179,7 +179,7 @@ const HowItWorksSection = () => {
                 <img
                   src={steps[activeIndex].image}
                   alt={steps[activeIndex].title}
-                  className="w-full h-80 xl:h-96 object-contain rounded-xl transition-transform duration-300 hover:scale-105"
+                  className="w-full h-auto object-contain rounded-xl transition-transform duration-300 hover:scale-105"
                 />
               </div>
             </div>
