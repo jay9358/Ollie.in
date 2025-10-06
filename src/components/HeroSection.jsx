@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Typed from "typed.js";
 
@@ -69,11 +69,34 @@ const industryContent = {
 
 
 const HeroSection = () => {
-  
+  const [industry, setIndustry] = useState("retail");
 
-  // ✅ get industry param directly from URL
-  const params = new URLSearchParams(window.location.search);
-  const industry = params.get("industry") || "retail"; // fallback to retail
+  // ✅ Listen for URL changes and update industry state
+  useEffect(() => {
+    const updateIndustry = () => {
+      const params = new URLSearchParams(window.location.search);
+      const newIndustry = params.get("industry") || "retail";
+      setIndustry(newIndustry);
+    };
+
+    // Initial load
+    updateIndustry();
+
+    // Listen for popstate events (back/forward navigation)
+    window.addEventListener('popstate', updateIndustry);
+
+    // Listen for custom industry change events
+    const handleIndustryChange = () => {
+      updateIndustry();
+    };
+    window.addEventListener('industryChanged', handleIndustryChange);
+
+    return () => {
+      window.removeEventListener('popstate', updateIndustry);
+      window.removeEventListener('industryChanged', handleIndustryChange);
+    };
+  }, []);
+
   const { title, subtitle, typedStrings } = industryContent[industry];
 
   // ✅ setup Typed.js

@@ -57,6 +57,9 @@ const IndustrySection = () => {
       params.set('industry', paramKey);
       const newUrl = `${window.location.pathname}?${params.toString()}`;
       window.history.replaceState({}, '', newUrl);
+      
+      // ✅ Dispatch custom event to notify HeroSection
+      window.dispatchEvent(new CustomEvent('industryChanged'));
     }
   };
 
